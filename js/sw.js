@@ -18,7 +18,7 @@ self.addEventListener('install', function (event) {
         '/js/dbhelper.js',
         '/js/main.js',
         '/js/restaurant_info.js',
-        '/index.html',
+        // '/index.html',
         '/restaurant.html'
     ];
 
@@ -35,5 +35,11 @@ self.addEventListener('install', function (event) {
 
 // Add listener for fetch event
 self.addEventListener('fetch', function (event) {
-    console.log(event.request);
+    // If it exists, bring the content from the cache storage, otherwise fetch it from network
+    event.respondWith(
+        caches.match(event.request).then(function(response) {
+            if (response) return response;
+            return fetch(event.request);
+        })
+    );
 });

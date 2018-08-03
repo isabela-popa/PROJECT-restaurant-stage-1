@@ -1,5 +1,8 @@
+// Store the latest cache in a variable
+let newCache = 'restaurant-reviews-v3';
+
 // Cache the URLs
-self.addEventListener('install', function (event) {
+self.addEventListener('install', event => {
     // add the urls to cache to an array
     let cacheUrls = [
         '/',
@@ -18,28 +21,41 @@ self.addEventListener('install', function (event) {
         '/js/dbhelper.js',
         '/js/main.js',
         '/js/restaurant_info.js',
-        // '/index.html',
+        '/index.html',
         '/restaurant.html'
     ];
 
+    // Open a new cache and cache the URLs
     event.waitUntil(
-        // Open a cache and cache the URLs
-        caches.open('restaurant-reviews-v1').then(function (cache) {
-            return cache.addAll(
-                cacheUrls
-            );
-        })
+        caches.open(newCache).then(cache =>
+            cache.addAll(cacheUrls)
+        )
     );
 });
 
+// Remove the old caches
+self.addEventListener('activate', event =>
+    event.waitUntil(
+        caches.keys().then(oldCaches =>
+            Promise.all(
+                oldCaches.filter(oldCache =>
+                    oldCache.startsWith('restaurant-reviews-') &&
+                    oldCache != newCache
+                ).map(oldCache =>
+                    caches.delete(oldCache)
+                )
+            )
+        )
+    )
+);
 
 // Add listener for fetch event
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', event =>
     // If it exists, bring the content from the cache storage, otherwise fetch it from network
     event.respondWith(
-        caches.match(event.request).then(function(response) {
+        caches.match(event.request).then(response => {
             if (response) return response;
             return fetch(event.request);
         })
-    );
-});
+    )
+);

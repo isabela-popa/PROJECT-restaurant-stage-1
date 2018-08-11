@@ -25,7 +25,7 @@ li {
 }
 
 a {
-  color: orange;
+  color: #ffa500;
   text-decoration: none;
 }
 
@@ -233,7 +233,7 @@ nav h1 a {
 }
 
 #restaurants-list li h1 {
-  color: #7d4f00;
+  color: #b56000;
   font-family: Arial, sans-serif;
   font-size: 14pt;
   font-weight: 200;
@@ -249,7 +249,7 @@ nav h1 a {
 }
 
 #restaurants-list li a {
-  background-color: #7d4f00;
+  background-color: #a56900;
   border-bottom: 3px solid #eee;
   color: #fff;
   display: inline-block;

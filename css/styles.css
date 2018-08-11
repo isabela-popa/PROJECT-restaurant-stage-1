@@ -71,7 +71,7 @@ section {
 
 #footer {
   background-color: #444;
-  color: #aaa;
+  color: #b1b1b1;
   font-size: 8pt;
   letter-spacing: 1px;
   padding: 25px;
@@ -178,7 +178,7 @@ nav h1 a {
 .filter-options {
   width: 100%;
   height: 50px;
-  background-color: #3397DB;
+  background-color: #007dbb;
   align-items: center;
 }
 
@@ -233,7 +233,7 @@ nav h1 a {
 }
 
 #restaurants-list li h1 {
-  color: #f18200;
+  color: #7d4f00;
   font-family: Arial, sans-serif;
   font-size: 14pt;
   font-weight: 200;
@@ -249,7 +249,7 @@ nav h1 a {
 }
 
 #restaurants-list li a {
-  background-color: orange;
+  background-color: #7d4f00;
   border-bottom: 3px solid #eee;
   color: #fff;
   display: inline-block;

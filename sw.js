@@ -1,5 +1,5 @@
 // Store the latest cache in a variable
-let newCache = 'restaurant-reviews-v3';
+let newCache = 'restaurant-reviews-v4';
 
 // Cache the URLs
 self.addEventListener('install', event => {
@@ -55,7 +55,13 @@ self.addEventListener('fetch', event =>
     event.respondWith(
         caches.match(event.request).then(response => {
             if (response) return response;
-            return fetch(event.request);
+            return fetch(event.request).then(response => {
+                let responseClone = response.clone();
+                caches.open(newCache).then(cache => {
+                    cache.put(event.request, responseClone);
+                });
+                return response;
+            });
         })
     )
 );

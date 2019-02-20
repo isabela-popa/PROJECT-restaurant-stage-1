@@ -4,6 +4,18 @@ let restaurants,
 var newMap
 var markers = []
 
+// Register the Service Worker
+startServiceWorker = () => {
+  if (!navigator.serviceWorker) return;
+
+  navigator.serviceWorker.register('/sw.js').then(() => {
+    console.log('Registration worked');
+  }).catch(() => {
+    console.log('Registration failed');
+  })
+}
+startServiceWorker();
+
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
@@ -211,12 +223,13 @@ addMarkersToMap = (restaurants = self.restaurants) => {
 } */
 
 // Register the Service Worker
-if(navigator.serviceWorker) {
+// if(navigator.serviceWorker) {
 
-  navigator.serviceWorker.register('/js/sw.js').then(() =>
-    console.log('Service Worker registered!')
-  ).catch(() =>
-    console.log('Service Worker not registered!')
-  );
+//   navigator.serviceWorker.register('/js/sw.js')
+//     .then(registration =>
+//       console.log('Service Worker registered! Scope is ', registration.scope)
+//     ).catch(error =>
+//       console.log('Service Worker not registered! With ', error)
+//     );
 
-}
+// }
